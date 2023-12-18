@@ -16,3 +16,17 @@
 #    pipelines:
 #      traces:
 #        exporters: [spanmetrics, otlphttp/example]
+
+exporters:
+  googlecloud:
+
+  googlemanagedprometheus:
+
+service:
+  pipelines:
+    logs:
+      exporters: [googlecloud]
+    traces:
+      exporters: [spanmetrics, googlecloud]
+    metrics:
+      exporters: [googlemanagedprometheus]
