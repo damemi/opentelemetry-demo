@@ -17,6 +17,16 @@
 #      traces:
 #        exporters: [spanmetrics, otlphttp/example]
 
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 65
+    spike_limit_percentage: 20
+
+  resourcedetection:
+    detectors: [gcp]
+    timeout: 10s
+    
 exporters:
   googlecloud:
 
@@ -25,8 +35,11 @@ exporters:
 service:
   pipelines:
     logs:
+      processors: [batch, memory_limiter, resourcedetection]
       exporters: [googlecloud]
     traces:
+      processors: [batch, memory_limiter, resourcedetection]
       exporters: [spanmetrics, googlecloud]
     metrics:
+      processors: [filter/ottl, transform, batch, memory_limiter, resourcedetection]
       exporters: [googlemanagedprometheus]
