@@ -41,3 +41,17 @@ opentelemetry-collector:
         metrics:
           processors: [filter/ottl, transform, batch, memory_limiter, resourcedetection]
           exporters: [googlemanagedprometheus]
+
+components:
+  frontendProxy:
+    service:
+      type: NodePort
+
+#    ingress:
+#      enabled: true
+#      annotations: {}
+#      defaultBackend:
+#        service:
+#          name: my-otel-demo-frontendproxy
+#          port:
+#            number: 8080
