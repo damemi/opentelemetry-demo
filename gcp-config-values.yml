@@ -21,12 +21,18 @@ opentelemetry-collector:
         limit_percentage: 65
         spike_limit_percentage: 20
 
+      batch:
+        send_batch_max_size: 200
+        send_batch_size: 200
+
       resourcedetection:
         detectors: [gcp]
         timeout: 10s
 
     exporters:
       googlecloud:
+        log:
+          default_log_name: opentelemetry.io/opentelemetry-demo
 
       googlemanagedprometheus:
 
