@@ -14,6 +14,12 @@
 
 
 opentelemetry-collector:
+  # Service account for workload identity
+  serviceAccount:
+    create: true
+    annotations: {"iam.gke.io/gcp-service-account":"opentelemetry-demo@mikedame-joonix.iam.gserviceaccount.com"}
+    name: "opentelemetry-demo"
+  
   config:
     processors:
       memory_limiter:
@@ -49,7 +55,7 @@ opentelemetry-collector:
           exporters: [googlemanagedprometheus]
 
 # Service account for workload identity
-serviceAccount:
-  create: true
-  annotations: {"iam.gke.io/gcp-service-account":"opentelemetry-demo@mikedame-joonix.iam.gserviceaccount.com"}
-  name: "opentelemetry-demo"
+#serviceAccount:
+#  create: true
+#  annotations: {"iam.gke.io/gcp-service-account":"opentelemetry-demo@mikedame-joonix.iam.gserviceaccount.com"}
+#  name: "opentelemetry-demo"
