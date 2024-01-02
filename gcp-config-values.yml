@@ -17,7 +17,7 @@ opentelemetry-collector:
   # Service account for workload identity
   serviceAccount:
     create: true
-    annotations: {"iam.gke.io/gcp-service-account":"opentelemetry-demo@mikedame-joonix.iam.gserviceaccount.com"}
+    annotations: {"iam.gke.io/gcp-service-account":"opentelemetry-demo@%GCLOUD_PROJECT%.iam.gserviceaccount.com"}
     name: "opentelemetry-demo"
   
   config:

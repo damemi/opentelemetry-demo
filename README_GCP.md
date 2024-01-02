@@ -35,6 +35,12 @@ gcloud iam service-accounts add-iam-policy-binding opentelemetry-demo@${GCLOUD_P
     --member "serviceAccount:${GCLOUD_PROJECT}.svc.id.goog[default/opentelemetry-demo]"
 ```
 
+Update [`gcp-config-valus.yml`](gcp-config-values.yml) to annotate the Kubernetes service account with your project:
+
+```
+sed -i "s/%GCLOUD_PROJECT%/${GCLOUD_PROJECT}/g" gcp-config-values.yml
+```
+
 Next, when you deploy the Helm chart, the
 [`gcp-config-values.yml`](gcp-config-values.yml) file will create the Kubernetes
 service account and annotate it to use Workload Identity.
