@@ -48,16 +48,8 @@ opentelemetry-collector:
           processors: [filter/ottl, transform, batch, memory_limiter, resourcedetection]
           exporters: [googlemanagedprometheus]
 
-components:
-  frontendProxy:
-    service:
-      type: NodePort
-
-#    ingress:
-#      enabled: true
-#      annotations: {}
-#      defaultBackend:
-#        service:
-#          name: my-otel-demo-frontendproxy
-#          port:
-#            number: 8080
+# Service account for workload identity
+serviceAccount:
+  create: true
+  annotations: {"iam.gke.io/gcp-service-account":"opentelemetry-demo@mikedame-joonix.iam.gserviceaccount.com"}
+  name: "opentelemetry-demo"
